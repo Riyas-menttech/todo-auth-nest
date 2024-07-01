@@ -11,9 +11,9 @@ export default function Home() {
         return <h1>Loading...</h1>
     }
     if (error) {
-        alert(error)
+        // alert(error)
     }
-    const users: any = data?.getUsers;
+    const users: any = data?.getUsers; 
     
 
   return (
@@ -22,7 +22,7 @@ export default function Home() {
         <div key={index}>
               <h1>id----{ user.id}</h1>
               <h1>Email -----{ user.Email}</h1>
-        </div>
+        </div>  
       ))}
    <Link href='/todo'><button>Create Todo</button></Link>
     </main>

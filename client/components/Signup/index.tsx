@@ -24,7 +24,7 @@ const Signup = () => {
         setEmail('')
         setPassword('')
         alert(data.SignupUser.message);
-        router.push("/Login");
+        router.push("/login");
         return;
       }
       alert(data.SignupUser.message);

@@ -4,7 +4,7 @@ import { CreateUserInput } from "./dto/create-user.input";
 import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "./entities/user.entity";
 import { Repository } from "typeorm";
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 // import { UpdateUserInput } from './dto/update-user.input';
@@ -25,7 +25,7 @@ export class UserService {
       };
     }
     try {
-      const hashPassword = await bcrypt.hash(Password, 10);
+      // const hashPassword = await bcrypt.hash(Password, 10);
       // console.log(hashPassword, 'passwordishere');
 
       // const newUserSinge: any = {
@@ -33,19 +33,19 @@ export class UserService {
       //   Password: hashPassword,
       // };
       // console.log(newUserSinge, 'log isheere');
-      if (hashPassword) {
-        const newuser = await this.UserRepo.create({
-          Email: Email,
-          Password: hashPassword,
-        });
-        await this.UserRepo.save(newuser);
+      // if (hashPassword) {
+      const newuser = await this.UserRepo.create({
+        Email: Email,
+        Password: Password,
+      });
+      await this.UserRepo.save(newuser);
 
-        return {
-          user: newuser,
-          message: "User successfully created",
-          status: 200,
-        };
-      }
+      return {
+        user: newuser,
+        message: "User successfully created",
+        status: 200,
+      };
+      // }
     } catch (error) {
       throw new InternalServerErrorException("Failed to create user");
     }
@@ -69,15 +69,15 @@ export class UserService {
         token: "",
       };
     }
-    const comparePassword = await bcrypt.compare(Password, user.Password);
-    if (!comparePassword) {
-      return {
-        user,
-        message: "Password Incorrect",
-        status: 400,
-        token: "",
-      };
-    }
+    // const comparePassword = await bcrypt.compare(Password, user.Password);
+    // if (!comparePassword) {
+    // return {
+    //   user,
+    //   message: "Password Incorrect",
+    //   status: 400,
+    //   token: "",
+    // };
+    // }
 
     const token: any = await jwt.sign({ email: user.Email }, secret, {
       expiresIn: "24h",

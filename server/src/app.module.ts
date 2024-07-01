@@ -8,6 +8,7 @@ import { UserModule } from "./user/user.module";
 import { User } from "./user/entities/user.entity";
 import { TodosModule } from "./todos/todos.module";
 import { ConfigModule } from "@nestjs/config";
+import { Todo } from "./todos/entities/todo.entity";
 
 @Module({
   imports: [
@@ -22,13 +23,13 @@ import { ConfigModule } from "@nestjs/config";
     TypeOrmModule.forRoot({
       type: "postgres",
       database: "mydatabase",
-      entities: [],
+      entities: [User, Todo],
       synchronize: true,
-      host: "localhost",
+      host: "postgresData",
       port: 5432,
       username: "apple",
       password: "mypassword",
-      // autoLoadEntities: true,
+      autoLoadEntities: true, 
     }),
     UserModule,
     TodosModule,

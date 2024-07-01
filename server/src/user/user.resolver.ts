@@ -40,16 +40,15 @@ export class UserResolver {
 
   @Query(() => [User])
   async getUsers(@Context() context, @Req() request: Request) {
-    const { token } = context;
-    if (token) {
-      const newToken = token.slice(7); // Split by space;
-      const user = await jwt.verify(newToken, secret);
-      if (user) {
-        return this.userService.findAll();
-      } else {
-        return;
-      }
-    }
+    // const { token } = context;
+    // if (token) {
+    //   const newToken = token.slice(7); // Split by space;
+    //   const user = await jwt.verify(newToken, secret);
+    //   if (user) {
+    return this.userService.findAll();
+    // } else {
+    //   return;
+    // }
   }
 
   @Query(() => User)

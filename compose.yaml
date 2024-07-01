@@ -1,0 +1,67 @@
+version: "3.9"
+
+services:
+  client:
+    depends_on:
+      - server
+    build:
+      context: ./client
+      # dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    develop:
+      watch:
+        - path: ./client/package.json
+          action: rebuild
+        - path: ./client/package-lock.json
+          action: rebuild
+        - path: ./client/next.config.mjs
+          action: rebuild
+        - path: ./client
+          target: /app
+          action: sync
+
+  server:
+    build:
+      context: ./server
+    ports:
+      - 5000:5000
+    environment:
+      POSTGRES_HOST: postgresData
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: apple
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - ./server:/app
+    depends_on:
+      - postgresData
+    command:  npm run start:dev
+    # develop:
+    #   watch:
+    #     - path: ./server/package.json
+    #       action: rebuild
+    #     - path: ./server/package-lock.json
+    #       action: rebuild
+
+    #     # it'll watch for changes in the server directory and sync the changes with the container real time
+    #     - path: ./server
+    #       target: /app
+    #       action: sync
+    #       command: ["sh", "/wait-for-it.sh", "postgres", "5432", "--", "npm", "run", "start:dev"]
+
+          
+  postgresData:
+    image: postgres:16
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: apple
+      POSTGRES_DB: mydatabase
+      POSTGRES_PASSWORD: mypassword 
+    volumes:
+      - todo:/var/lib/postgresql/data
+
+volumes:
+  todo:
