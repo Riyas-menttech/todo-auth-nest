@@ -38,3 +38,8 @@ import { Todo } from "./todos/entities/todo.entity";
   providers: [AppService],
 })
 export class AppModule {}
+
+
+// docker push dockerhub_username/todo-auth-nest-server:latest
+// docker push dockerhub_username/todo-auth-nest-postgres:latest
+// riyazmenttech

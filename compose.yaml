@@ -4,8 +4,9 @@ services:
   client:
     depends_on:
       - server
-    build:
+    build: 
       context: ./client
+    image: riyazmenttech/todo-client
       # dockerfile: Dockerfile
     ports:
       - 3000:3000
@@ -22,8 +23,7 @@ services:
           action: sync
 
   server:
-    build:
-      context: ./server
+    image: riyazmenttech/todo-server
     ports:
       - 5000:5000
     environment:
