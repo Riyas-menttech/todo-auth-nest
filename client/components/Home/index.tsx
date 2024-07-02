@@ -11,7 +11,7 @@ export default function Home() {
         return <h1>Loading...</h1>
     }
     if (error) {
-        // alert(error)
+        // alert(error)  
     }
     const users: any = data?.getUsers; 
     
@@ -24,7 +24,7 @@ export default function Home() {
               <h1>Email -----{ user.Email}</h1>
         </div>  
       ))}
-   <Link href='/todo'><button>Create Todo</button></Link>
+   <Link href='/todo'><button>Create Todo Docker</button></Link>
     </main>
   );
 }
